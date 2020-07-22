@@ -1,4 +1,8 @@
+# mac 文件会生成的奇怪文件
+.DS_Store
 .vscode
 mpvue-koa/mpvue-shop/node_modules
 mpvue-koa/mpvue-shop/dist
 mpvue-koa/mpvue-shop-node/node_modules
+04NodePrime/nodecli/node_modules
+04NodePrime/nodecli/cliTest

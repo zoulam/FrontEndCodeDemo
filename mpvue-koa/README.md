@@ -3,6 +3,8 @@
 
 [配套视频教程，本人仅是学习使用](https://www.bilibili.com/video/av83423939/)
 
+[原项目地址](https://github.com/cleversnail/mpvue-koa)
+
 **mpvue-shop 文件是该小程序的前端项目，使用mpvue**
 
 **mpvue-shop-node 文件是该小程序的后端项目，使用koa2**
@@ -17,7 +19,7 @@
 5. 将 `mpvue-shop-node` 中的 `nodemysql.sql` 导入到本地`mysql`库中，依照个人习惯操作，你可以使用图形化界面导入，下面是命令行导入介绍。
 
     ```bash
-    #删除数据库(如果你前面导入同名数据想要继续导入则需要先删除)
+    #删除数据库(如果你前面导入同名数据库想要继续导入则需要先删除)
     drop database nodemysql;
 
     #创建数据库nodenysql
@@ -46,7 +48,9 @@
 
 ### ①实时编译node代码的包，需要自行安装才有`nodemon`命令，用`node`命令也是一样的效果
 
-### ②需要关闭小程序设置中，否则后端数据无法加载
+### ②需要修改小程序设置，否则后端数据无法加载。
+
+**会被认为是非法或不安全的域名**
 
 ![image-20200722115926517](https://zoulam-pic-repo.oss-cn-beijing.aliyuncs.com/img/image-20200722115926517.png)
 
@@ -56,7 +60,7 @@
 
 **http500错误**
 
-mysql是默认密码验证是严格模式、将他设置为普通模式就能解决问题
+mysql是默认密码验证是严格模式、将它设置为普通模式就能解决问题
 
 >大意是8.0.4开始mysql引入一个caching_sha2_password模块作为默认身份验证插件，数据库连接时验证身份的工作方式(handshake process)会与以往不同。
 >
@@ -77,12 +81,14 @@ alter user 'root'@'localhost' identified with mysql_native_password by '123456';
 
 [官方地址](https://developers.weixin.qq.com/miniprogram/dev/reference/configuration/app.html#permission)
 
-**只需要在app.json配置中添加以下信息**
+**只需要在`mpvue-shop\src\app.json`配置中添加以下信息**
 
 ```json
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用提供更好的地址服务"
+      "desc": "你的位置信息将用作提供更好的地址服务"
     }
 ```
+
+**添加之后别忘记重新编译**
 

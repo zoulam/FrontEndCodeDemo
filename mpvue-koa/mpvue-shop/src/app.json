@@ -18,7 +18,7 @@
   ],
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用提供更好的地址服务"
+      "desc": "你的位置信息将用作提供更好的地址服务"
     }
   },
   "window": {
