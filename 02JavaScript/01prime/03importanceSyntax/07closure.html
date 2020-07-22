@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 配合立即执行函数形成闭包
+        (function closure() {
+            function add() {
+                console.log('i am a closure!');
+            }
+            window.add = add;
+        }());
+
+        add();
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

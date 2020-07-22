@@ -1,1 +1,4 @@
-# mpvuekoa2demo/node_modules
+.vscode
+mpvue-koa/mpvue-shop/node_modules
+mpvue-koa/mpvue-shop/dist
+mpvue-koa/mpvue-shop-node/node_modules
