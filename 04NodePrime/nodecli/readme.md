@@ -85,7 +85,7 @@ program.command('run')
     .description('run project')
     .action(() => {
         // shell.exec('npm run dev');
-        // 组合命令,优点：能丰富控制台的功能
+        // 组合命令,优点：能丰富控制台的功能，输出友好的提示信息
     
         // let cp = spawn('npm', ['run', 'dev']);
         const cp = spawn(/^win/.test(process.platform) ? 'npm.cmd' : 'npm', ['run',  'dev']);
@@ -113,7 +113,23 @@ program.parse(process.argv)
 
 ```
 
-## 4、常见问题
+### 执行
+
+```bash
+mycli new app
+mycli run
+mycli overview
+```
+
+其实`npm run dev`之后就有url出现了，而且`mycli overview`这条命令我觉得太长了。
+
+## 4、封装思路
+
+**①一般就是将功能一般化、通用化后续使用只需要修改配置信息就能完成对应功能，不过这也只是我的简单猜想，等我工作了再补上实际操作。**
+
+**②拆除`node_modules`的冗余文件。**
+
+## 常见问题
 
 关于`spawn`能力在Windows下失效的解决方式
 

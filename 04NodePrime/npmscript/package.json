@@ -1,0 +1,15 @@
+{
+  "name": "npmscript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "mkdir":"mkdir project1",
+    "cd":"cd project1",
+    "touch":"touch demo1.js demo2.js demo3.js",
+    "cli":"npm run mkdir&&npm run cd&&npm run touch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
