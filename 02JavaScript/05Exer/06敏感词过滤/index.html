@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #msg {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+
+        textarea {
+            width: 100%;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        let badMap = new Map();
+        badMap.set(3,/操你妈/ig);
+        badMap.set(4,/nmsl/ig);
+        function btnClick() {
+            let oTxt = document.getElementById("txt1");
+            let oMsg = document.getElementById("msg");
+
+            //表单元素用value，普通标签用innerHTML
+            var newValue = oTxt.value;
+            for (let i = 0; i < badMap.length; i++) {
+
+                newValue = newValue.replace(badMap[i], "*");
+            }
+            oMsg.innerHTML = newValue;
+            oTxt.value = "";
+        }
+
+    </script>
+</head>
+
+<body>
+    <textarea name="" id="txt1" cols="30" rows="10"></textarea>
+    <button onclick="btnClick();">发布</button>
+    <div id="msg"></div>
+</body>
+
+</html>

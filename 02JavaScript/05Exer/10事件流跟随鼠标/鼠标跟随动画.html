@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        div {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var aDivs = document.getElementsByTagName("div");
+            document.onmousemove = function (ev) {
+                var ev = ev || window.event;
+                //倒序遍历,让后面的点跟随前面的点运动
+                for (var i = aDivs.length - 1; i > 0; i--) {
+                    aDivs[i].style.left = aDivs[i - 1].offsetLeft + 'px';
+                    aDivs[i].style.top = aDivs[i - 1].offsetTop + 'px';
+                }
+                //跟随鼠标
+                aDivs[0].style.left = ev.clientX + 'px';
+                aDivs[0].style.top = ev.clientY+ 'px';
+                console.log(aDivs);
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+
+</html>

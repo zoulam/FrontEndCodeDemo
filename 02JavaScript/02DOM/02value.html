@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            var inP = document.getElementById("inP");
+            var P = document.getElementById("P");
+            var btn = document.getElementById("btn");
+            btn.onclick = function () {
+                //value
+                console.log("inputvalue: " + inP.value);
+                console.log("Pvalue: " + P.value);
+                console.log("buttonvalue " + btn.value);
+                console.log('-------------------------------------------');
+
+                // 带标签
+                console.log("innerHTML:" + P.innerHTML);
+                console.log("outerHTML:" + P.outerHTML);
+                console.log('-------------------------------------------');
+
+                // 纯文本
+                console.log("innerText: " + P.innerText);
+                console.log("outerText: " + P.outerText);
+                // function
+                console.log('-------------------------------------------');
+
+                // 获取p标签的name
+                console.log("getAttribute: " + btn.getAttribute("value"));
+                // 将P标签的name设置为123
+                console.log("setAttribute: " + btn.setAttribute("name","123"));// 返回值为undefined
+                console.log("getAttribute: " + btn.getAttribute("name"));
+                // 将P标签的name从123改为456
+                console.log("setAttribute: " + btn.setAttribute("name","456"));
+                console.log("getAttribute: " + btn.getAttribute("name"));
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" id="inP">
+
+    <div id="P">
+        <p value="无效的value">5566555</p>
+    </div>
+
+    <button id="btn" value="btnValue">确定</button>
+</body>
+
+</html>

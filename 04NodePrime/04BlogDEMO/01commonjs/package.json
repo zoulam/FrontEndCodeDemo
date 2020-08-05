@@ -1,0 +1,15 @@
+{
+  "name": "04BlogExpress",
+  "version": "1.0.0",
+  "description": "![demo架构图](https://zoulam-pic-repo.oss-cn-beijing.aliyuncs.com/img/image-20200802141851729.png)",
+  "main": "a.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.19"
+  }
+}

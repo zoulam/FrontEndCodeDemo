@@ -46,4 +46,4 @@ router.post('/address/saveAction', controllers.address.index.saveAction)
 router.get('/topic/listaction', controllers.topic.index.listAction)
 router.get('/topic/detailaction', controllers.topic.index.detailAction)
 
-module.exports = router
+module.exports = router;

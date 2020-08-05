@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #slide {
+            position: relative;
+            width: 600px;
+            height: 30px;
+            border: 1px solid black;
+            margin: 100px auto;
+        }
+
+        #block {
+            width: 30px;
+            height: 30px;
+            background-color: aqua;
+            position: absolute;
+            left: 0px;
+        }
+
+        #full {
+            width: 0px;
+            height: 30px;
+            background-color: orange;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oSlide = document.getElementById('slide');
+            var oBlock = document.getElementById('block');
+            var oFull = document.getElementById('full');
+
+            // console.log(oSlide);
+            // console.log(oBlock);
+            // console.log(ofull);
+
+            //获取localstorage存储的位置信息
+            if (!window.localStorage) {
+                alert("该浏览器不支持local storage！")
+            } else {
+                var l = localStorage.getItem('slide') ? localStorage.getItem('slide') : 0;
+                oBlock.style.left = l + 'px';
+                //填充
+                oFull.style.width = l + 'px';
+            }
+
+            oBlock.onmousedown = function (ev) {
+                var ev = ev || window.event;
+                var offsetX = ev.clientX - oBlock.offsetLeft;
+
+                document.onmousemove = function (ev) {
+                    var ev = ev || window.event;
+                    var l = ev.clientX - offsetX;
+                    if (l <= 0) {
+                        l = 0;
+                    } else if (l > 570) {
+                        l = 570;
+                    }
+                    oBlock.style.left = l + 'px';
+                    //填充
+                    oFull.style.width = l + 'px';
+
+                    //存储位置信息
+                    if (!window.localStorage) {
+                        alert("该浏览器不支持local storage！")
+                    } else {
+                        localStorage.setItem("slide", l);
+                    }
+                }
+            }
+
+            document.onmouseup = function () {
+                document.onmousemove = null;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="slide">
+        <div id="full"></div>
+        <div id="block"></div>
+    </div>
+</body>
+
+</html>

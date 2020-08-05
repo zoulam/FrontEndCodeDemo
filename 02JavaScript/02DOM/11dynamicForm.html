@@ -1,0 +1,92 @@
+<!-- 18动态生成表格.html -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #t1 {
+            border: 1px solid;
+        }
+
+        #t1 tr td {
+            width: 100px;
+            height: 30px;
+        }
+
+        td>button {
+            width: 100px;
+            height: 30px;
+            background-color: rgb(64, 114, 114);
+
+        }
+
+        .box1 {
+            background-color: antiquewhite;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oRow = document.getElementById('row');
+            var oCol = document.getElementById('col');
+            var oBtn = document.getElementById('btn1');
+            var oT1 = document.getElementById('t1');
+            var otr = oT1.getElementsByTagName('tr');
+
+            //给table添加  删除tr 的事件委托
+            oT1.addEventListener('click', function (e) {
+                var e = e || window.event;
+                var target = e.target || e.srcElement;
+
+
+                //获取按钮
+                if (target.nodeName.toLowerCase() == 'button') {
+                    //通过按钮删除行
+                    oT1.removeChild(target.parentNode.parentNode);
+                    for (let i = 0; i < otr.length; i++) {
+                        otr[i].className = 'box' + (i % 2);
+                    }
+                }
+            }, false);
+
+            oT1.addEventListener('click', (ev) => {
+                var target = ev.target;
+
+            }, false);
+
+            oBtn.onclick = function () {
+                //判断行列是否为空
+                if (!oRow.value || !oCol.value) {
+                    alert("请输入行和列");
+                }
+                else {
+                    for (var i = 0; i < oRow.value; i++) {
+                        var oTr = document.createElement('tr');
+                        //不同行不同色
+                        oTr.className = 'box' + (i % 2);
+                        for (var j = 0; j < oCol.value; j++) {
+                            var oTd = document.createElement('td');
+                            oTr.appendChild(oTd);
+                        }
+                        //添加删除按钮
+                        var oClose = document.createElement('td');
+                        oClose.innerHTML = '<button>删除</button>';
+                        oTr.appendChild(oClose);
+                        oT1.appendChild(oTr);
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" placeholder="行" id="row" />
+    <input type="text" placeholder="列" id="col" />
+    <button id="btn1">生成</button>
+    <table border="1" id="t1"><input type="text"></table>
+</body>
+
+</html>

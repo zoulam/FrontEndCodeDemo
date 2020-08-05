@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 200px;
+            padding: 50px;
+            background-color: lightblue;
+            border: 1px solid black;
+
+        }
+
+        #div1 span {
+            font-size: 20px;
+        }
+
+        #div1 button {
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+    </style>
+
+    <script>
+        /*
+        脚本内绑定事件驱动函数
+        */
+        function $(id) {
+            return document.getElementById(id);
+        }
+        //开始和暂停按钮分开会有一个问题：
+        //每次点击开始就会触发setInterval，时间变快
+        var i = 0;//总秒数
+        var timer = null;
+        var isRunning = false;
+        //window.onload 将被包裹的内容整个页面加载完成之后运行
+        window.onload = function () {
+            function startFunc() {
+                timer = setInterval(() => {
+                    i++;
+                    $("sec").innerHTML = doubleNum(i % 60);
+                    $("min").innerHTML = doubleNum(Math.floor(i / 60) % 60);
+                    $("hour").innerHTML = doubleNum(Math.floor(i / 3600) % 24);
+                }, 1000);
+            }
+
+            function pauseFunc() {
+                clearInterval(timer);
+            }
+            $("btn").onclick = function () {
+                if (!isRunning) {
+                    $("btn").innerHTML = "暂停";
+                    isRunning = true;
+                    startFunc();
+                } else {
+                    $("btn").innerHTML = "开始";
+                    isRunning = false;
+                    pauseFunc();
+                }
+            }
+
+            $("reset").onclick = function () {
+                clearInterval(timer);
+                i = 0;
+                //复位的时候需要把状态恢复
+                isRunning = false;
+                $("sec").innerHTML = "00";
+                $("min").innerHTML = "00";
+                $("hour").innerHTML = "00";
+            }
+
+        }
+        //两位数显示
+        function doubleNum(n) {
+            if (n < 10) {
+                return "0" + n;
+            } else {
+                return n;
+            }
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <div id="div1">
+        <span id="hour">00</span>
+        <span>:</span>
+        <span id="min">00</span>
+        <span>:</span>
+        <span id="sec">00</span>
+        <br />
+        <button id="btn">开始</button>
+        <!-- <button id="start">开始</button> -->
+        <!-- <button id="pause">暂停</button> -->
+        <button id="reset">复位</button>
+        <span></span>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        #div1 input {
+            width: 180px;
+            height: 30px;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        #div1 span {
+            font-size: 14px;
+            color: red;
+        }
+    </style>
+    <script>
+        /*
+        事件驱动函数
+        onclick ：点击
+        onblur ：失去焦点
+        */
+        function func() {
+            console.log("失去焦点")
+            let oUsername = document.getElementById("username");
+            let oUsernameSpan = document.getElementById("username_span");
+            let oValue = oUsername.value;
+            let userReg = /^[a-zA-Z]/g;
+            if (oValue.length < 6 || oValue.length > 18) {
+                oUsernameSpan.innerHTML="!用户名应该是6~18个字符";
+            }else if(!oValue.match(userReg)){
+                oUsernameSpan.innerHTML="！用户名应该以字母开头";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="div1">
+        <input id="username" type="text" placeholder="用户名" onblur="func();" autocomplete="off" />
+        <br/><span id="username_span">用户名应该是6~18个字符，可以包含字母、数字、下划线，且必须以字母开头</span>
+        <input type="text" placeholder="密码" autocomplete="off" />
+    </div>
+</body>
+
+</html>

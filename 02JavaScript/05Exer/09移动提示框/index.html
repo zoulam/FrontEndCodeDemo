@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box1 {
+            width: 500px;
+            height: 500px;
+            margin-left: auto;
+        }
+
+        #msg {
+            width: 100px;
+            height: 18px;
+            background-color: gray;
+            color: white;
+            display: none;
+            position: absolute;
+        }
+    </style>
+    <script>
+        //根据a标签的下标存储信息
+        var arr = ["HTML fuck", "fuck css", "JS fuck"];
+        window.onload = function () {
+            var aAs = document.getElementsByTagName("a");
+            var oMsg = document.getElementById("msg");
+            for (var i = 0; i < aAs.length; i++) {
+                aAs[i].index = i;
+                aAs[i].onmouseover = function () {
+                    oMsg.innerHTML = arr[this.index];
+                    oMsg.style.display = "block";
+                }
+                aAs[i].onmouseout = function () {
+                    oMsg.style.display = "none";
+                }
+
+                //当div的内容显示的时候，就脱离a标签的层级，就会立刻触发onmouseout事件，  div也就消失了
+                // 跟随鼠标
+                //+8的原因就是防止鼠标下的a标签被div遮挡
+                aAs[i].onmousemove = function (ev) {
+                    var ev = ev || window.event;
+                    oMsg.style.left = ev.clientX + 8 + "px";
+                    oMsg.style.top = ev.clientY + 8 + "px";
+                }
+
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="box1">
+        <a href="#">HTML</a><br />
+        <a href="#">CSS</a><br />
+        <a href="#">JS</a><br />
+        <div id="msg"></div>
+    </div>
+</body>
+
+</html>

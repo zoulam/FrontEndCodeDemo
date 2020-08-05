@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background-color: gray;
+            position: absolute;
+        }
+    </style>
+    <script>
+        /*
+            mousedown
+                记录鼠标与被拖拽物体的相对距离
+                var offsetX = ev.clientX - node.offsetLeft;
+                var offsetY = ev.clientY - node.offsetTop;
+            mousemove
+                获取物体位置信息（鼠标距离-相对距离）
+                node.style.left = ev.clientX - offsetX + 'px';
+                node.style.top = ev.clientY - offsetY + 'px';
+            mouseup
+                取消拖拽
+            防止出界（根据窗口宽高判断是否出界从而阻止出界）
+        */
+        window.onload = function () {
+            var oDiv = document.getElementById('div1');
+            limitDrag(oDiv);
+        }
+
+        function limitDrag(elem) {
+            //获取鼠标与物体的相对距离，实现相对静止
+            elem.onmousedown = function (ev) {
+                var ev = ev || window.event;
+                var offsetX = ev.clientX - elem.offsetLeft;
+                var offsetY = ev.clientY - elem.offsetTop;
+                //鼠标是用户移动的，物体是dom实现移动的，所以操作的是全局document
+                document.onmousemove = function (ev) {
+                    var ev = ev || window.event;
+                    //l是物体距离窗口左侧的距离，t是物体距离窗口顶端的距离
+                    var l = ev.clientX - offsetX;
+                    var t = ev.clientY - offsetY;
+                    //限制出界
+                    //获取屏幕高度和宽度
+                    var windowWidth = document.documentElement.clientWidth || document.body.clientWidth;
+                    var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+
+                    if (l < 0) {//跃出左边界
+                        l = 0;
+
+                    } else if (l >= windowWidth - elem.offsetWidth) {
+                        //跃出右边界,窗口宽度 - 物体可视宽
+                        l = windowWidth - elem.offsetWidth;
+                    }
+
+                    if (t < 0) {
+                        t = 0;
+                    } else if (t >= windowHeight - elem.offsetHeight) {
+                        t = windowHeight - elem.offsetHeight;
+                    }
+
+
+                    elem.style.left = l + 'px';
+                    elem.style.top = t + 'px';
+                }
+            }
+            document.onmouseup = function () {
+                document.onmousemove = null;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="div1"></div>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1{
+            background-color: aquamarine;
+            width: 100px;
+            height: 30px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 30px;
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        /*
+         6位纯数字的验证码
+         数字和字符组成的验证码:
+         0-9 97~122
+         a-z 65~90
+         A-Z
+         1.存入数组中，随机下标
+         2.随机ASCII码值
+        */
+        function numTestCode(n) {
+            let arr = [];
+            for (let i = 0; i < n; i++) {
+                let num = Math.floor(Math.random() * 10);
+                arr.push(num);
+            }
+            return arr.join("");
+        }
+        console.log(numTestCode(6));
+
+        function testCode(n) {
+            let arr = [];
+            for (let i = 0; i < n; i++) {
+                let num = Math.floor(Math.random() * 123);
+                if (num >= 0 && num <= 9) {
+                    arr.push(num);
+                } else if ((num > 97 && num < 122) || (num > 65 && num < 90)) {
+                    arr.push(String.fromCharCode(num));
+                } else {//不属于数字和字母的不占用循环次数
+                    i--;
+                }
+            }
+            return arr.join("");
+        }
+        console.log(testCode(6));
+
+        /*
+        时间驱动函数
+        */
+        function btnClick() {
+            let oDiv = document.getElementById("div1");
+            oDiv.innerHTML = testCode(6);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="div1">000000</div>
+    <button onclick="btnClick();">获取验证码</button>
+</body>
+
+</html>

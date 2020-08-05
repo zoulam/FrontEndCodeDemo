@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1 div {
+            width: 400px;
+            height: 400px;
+        }
+
+        .active {
+            background-color: orange;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oDiv1 = document.getElementById("div1");
+            var aBtns = oDiv1.getElementsByTagName("button");
+            var aDivs = oDiv1.getElementsByTagName("div");
+
+            for (var i = 0; i < aBtns.length; i++) {
+                aBtns[i].index = i;//获取按钮下标
+
+                aBtns[i].onclick = function () {
+                    //将全部按钮样式清空，同时隐藏div内容
+                    for (var j = 0; j < aBtns.length; j++) {
+                        aBtns[j].className = "";
+                        aDivs[j].style.display = "none";
+                    }
+                    //将权重按钮变色
+                    this.className = 'active';
+                    //显示相应内容
+                    aDivs[this.index].style.display = "block";
+                }
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="div1">
+        <button class="active">html5</button>
+        <button>python</button>
+        <button>java</button>
+        <div style="display: block;">html Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias cum nostrum
+            accusantium exercitationem nulla ipsa sequi nobis amet necessitatibus magnam iure ex a sint alias vitae
+            soluta, iste quod quasi.</div>
+        <div style="display: none;">python Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate amet id
+            atque commodi est tempora
+            alias nihil aspernatur. Ad ut voluptas dolores? Reiciendis totam explicabo quae iste exercitationem illo?
+            Eveniet.</div>
+        <div style="display: none;">python Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, aspernatur
+            voluptatem ratione
+            distinctio omnis vitae quia magnam libero quaerat ea expedita accusantium ipsam aut id obcaecati voluptatum
+            quod. Repudiandae, vitae!
+    </div>
+    </div>
+</body>
+
+</html>

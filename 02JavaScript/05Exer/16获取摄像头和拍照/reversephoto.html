@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="256" height="192"></canvas>
+</body>
+</html>
+<script>
+var Tween = {
+    Quad: {
+        easeInOut: function(t, b, c, d) {
+            if ((t /= d / 2) < 1) return c / 2 * t * t + b;
+            return -c / 2 * ((--t) * (t-2) - 1) + b;
+        }
+    }
+};
+
+// canvas 2d上下文获取
+var canvas = document.querySelector('canvas');
+var context = canvas.getContext('2d');
+
+// 下面是一开始图片呈现的处理方法
+var strImgUrl = 'blank.png';
+var eleImg = document.createElement('img');
+eleImg.origin = '';
+eleImg.onload = function () {
+    context.drawImage(this, 0, 0);
+};
+eleImg.src = strImgUrl;
+
+// 水平翻转动画
+var loop = 1;
+var flipX = function () {
+    // 缓动执行API
+    // Math.animation(form, to, duration, easing, callback);
+    Math.animation(1 * loop, -1 * loop, 600, 'Quad.easeInOut', function (value, isEnding) {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.translate(canvas.width / 2 - canvas.width * value / 2, 0);
+        context.scale(value, 1);
+        context.drawImage(eleImg, 0, 0);
+        // 坐标参考还原
+        context.setTransform(1, 0, 0, 1, 0, 0);
+        if (isEnding) {
+            loop = -1 * loop;
+        }
+    });
+};
+
+// 点击画布水平动画翻转
+canvas.addEventListener('click', flipX);
+</script>

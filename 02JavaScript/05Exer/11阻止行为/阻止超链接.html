@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    window.onload = function () {
+        var a1 = document.getElementById('a1');
+        a1.onclick = function (ev) {
+            ev = ev || window.event;
+            // return false;
+            // return confirm("是否离开当前页面");
+            // return 结束了函数，无法进行其他行为
+            ev.preventDefault?ev.preventDefault():ev.returnValue = false;
+            alert("dosomething");
+        }
+    }
+</script>
+
+<body>
+    <a id="a1" href="https://www.baidu.com">baidu</a>
+</body>
+
+</html>

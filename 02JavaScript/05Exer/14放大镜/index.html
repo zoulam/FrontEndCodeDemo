@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #small {
+            /* 原图的1/4 */
+            width: 270px;
+            height: 405px;
+            left: 100px;
+            top: 100px;
+            position: absolute;
+        }
+
+        #small img {
+            width: 100%;
+            height: 100%;
+        }
+
+        #mark {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            opacity: 0.2;
+            /* filter: alpha(opacity=50); */
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            display: none;
+        }
+
+        #big {
+            /* 放大也是4倍 */
+            width: 400px;
+            height: 400px;
+            border: 1px solid;
+            position: absolute;
+            left: 600px;
+            top: 100px;
+            overflow: hidden;
+        }
+
+        #big img {
+            width: 1080px;
+            height: 1620px;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var oSmall = document.getElementById('small');
+            var oBig = document.getElementById('big');
+            var oMark = document.getElementById('mark');
+            var oBigImg = oBig.getElementsByTagName('img')[0];
+            oSmall.onmouseover = function () {
+                oMark.style.display = 'block';
+                oBig.style.display = 'block';
+            }
+            oSmall.onmouseout = function () {
+                oMark.style.display = 'none';
+                oBig.style.display = 'none';
+            }
+            oSmall.onmousemove = function (e) {
+                var e = e || window.event;
+                var l = e.clientX - oSmall.offsetLeft - 50;
+                var t = e.clientY - oSmall.offsetTop - 50;
+                //防止出界
+                if (l < 0) {
+                    l = 0;
+                } else if (l >= oSmall.width - oMark.width) {
+                    l = oSmall.width - oMark.width;
+                }
+                if (t < 0) {
+                    t = 0;
+                } else if (t >= oSmall.height - oMark.height) {
+                    t = oSmall.height - oMark.height;
+                }
+                oMark.style.left = l + 'px';
+                oMark.style.top = t + 'px';
+
+                // 放大图片移动方式，根据小图遮罩层移动，反方向对应倍数移动
+                oBigImg.style.left = l * (-4) + 'px';
+                oBigImg.style.top = t * (-4) + 'px';
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- 1080*1620 -->
+    <div id="small">
+        <img src="./p2610154921.webp" alt="豆瓣鹿角" />
+        <div id="mark"></div>
+    </div>
+    <div id="big">
+        <img src="./p2610154921.webp" alt="豆瓣鹿角" />
+    </div>
+</body>
+
+</html>
