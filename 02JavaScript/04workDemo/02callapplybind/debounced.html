@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        /*
+                1、对于事件触发n秒后才执行的回调，延迟执行
+                2、在n秒内再次触发事件，重新计时
+                3、目的：减少事件触发次数，避免出现抖动
+                4、场景：ajax提交：首次提交立即执行，从第二次开始使用防抖
+                        输入验证
+                        下拉刷新
+                 */
+        // let oBox = document.querySelector('.box');
+        // let t = null;
+        // oBox.onmouseover = function () {
+        //     clearTimeout(t);
+        //     // t是计时器的id
+        //     t = setTimeout(() => {
+        //         console.log(1)
+        //     }, 1000)
+        // }
+
+        let oBox = document.querySelector('.box');
+        function test() {
+            console.log(1);
+        }
+        oBox.onmouseover = debounce(test, 1000, true);
+
+
+        // triggleNow 当前触发器,首次进入是否防抖
+        function debounce(fn, time, triggleNow) {
+            let t = null;
+            let debounced = function () {
+                let ctx = this;
+                let args = arguments;
+                console.log(args, ctx);
+                if (t) {
+                    clearTimeout(t);
+                }
+                // 第二次开始防抖
+                if (triggleNow) {
+                    let exec = !t;
+
+                    // n秒内进入清除t的id
+                    t = setTimeout(() => {
+                        t = null;
+                    }, time)
+
+                    // 首次进入时 t = null
+                    // exec 为真 所以会直接执行
+                    if (exec) {
+                        fn.apply(ctx, args);
+                        // triggleNow = false;
+                    }
+                } // 首次开始防抖
+                else {
+                    t = setTimeout(() => {
+                        fn.apply(ctx, args);
+                    }, time)
+                }
+            }
+            // 清除防抖
+            debounced.remove = function () {
+                clearTimeout(t);
+                t = null;
+            }
+            return debounced
+        }
+
+    </script>
+
+</body>
+
+</html>

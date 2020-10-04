@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #app {
+            font-size: 0px;
+        }
+
+        .app {
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin-left: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 元素间隙
+            方法1：给父元素font-size: 0px;
+            方法2：子元素不换行（这个也是很迷惑，但是确实有效）
+            方法3：开启flex
+            -->
+        <p class="app"></p>
+        <p class="app"></p>
+    </div>
+</body>
+
+</html>

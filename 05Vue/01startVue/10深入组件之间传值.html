@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!--  同层级的节点直接传递值非常麻烦 -->
+
+<body>
+    <div id="app">
+        <child content="hello"></child>
+        <child content="hello"></child>
+        <child content="hello"></child>
+        <child content="bye"></child>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.prototype.bus = new Vue();
+        Vue.component('child', {
+            data() {
+                return {
+                    newVal: this.content
+                }
+            },
+            props: ['content'],
+            template: '<div @click="exchange">{{newVal}}</div>',
+            methods: {
+                exchange: function () {
+                    this.bus.$emit('change', this.newVal)
+                }
+            },
+            // beforeMounted 时还未挂载数据，无法打印内容
+            mounted: function () {
+                this.bus.$on('change', (newVal) => {
+                    this.newVal = newVal;
+                })
+            }
+        })
+
+
+        let vm = new Vue({
+            el: '#app',
+            methods: {
+            }
+        })
+    </script>
+</body>
+
+</html>

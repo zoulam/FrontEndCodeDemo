@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        let oDiv = document.getElementsByTagName('div')[0];
+        let img = new Image();
+        img.src = '../static/1.jpg'
+        img.onload = function () {
+            oDiv.appendChild(img);
+        }
+    </script>
+</body>
+
+</html>

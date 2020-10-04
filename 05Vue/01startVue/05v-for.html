@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 使用index作为key容易重复 -->
+        <li v-for="(item,index) of msg" :key="item.id">{{index + 1}}--{{item.text}}</li>
+        <table>
+            <!-- 组件被渲染到了table外面 -->
+            <tbody>
+                <row-item id="error"></row-item>
+                <tr is="row-item" id="easy"></tr>
+                <tr is="row-item" id="easy"></tr>
+            </tbody>
+        </table>
+        <button-item></button-item>
+        <button-item></button-item>
+        <button-item></button-item>
+    </div>
+    <!-- vue 的数组方法的重写过的，所以使用索引修改的值是无法实现双向绑定的，vue3.0使用proxy就不存在这个问题 -->
+    <!-- 使用Vue.set(vm.item,vm.index,vm.value)可以解决这个问题 -->
+    <!-- 实例方法 -->
+    <!-- 使用vm.$set(vm.item,vm.index,vm.value)可以解决这个问题 -->
+    <!-- 使用赋值的方式整个修改 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+
+        Vue.component('RowItem', {
+            template: ' <tr><td>{{content}}</td></tr>',
+            data(){
+                return {
+                    content:'gohome'
+                }
+            }
+        })
+
+
+        let errorData = {
+            count: 0
+        }
+        Vue.component('ButtonItem', {
+            template: '<button @click="add">{{count}}</button>',
+            // 防止组件共用数据
+            data() {
+                return errorData;
+            }, methods: {
+                add: function () {
+                    this.count++;
+                }
+            }
+        })
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                msg: [{
+                    id: 121210,
+                    text: 'my'
+                }, {
+                    id: 121211,
+                    text: 'name'
+                }, {
+                    id: 121212,
+                    text: 'zoulam'
+                }],
+                show: true
+            }
+        })
+    </script>
+</body>
+
+</html>

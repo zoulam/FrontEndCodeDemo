@@ -1,5 +1,0 @@
-helloworld
-firefox
-chrome
-webkit
-safari

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body,
+        .container {
+            height: 1000%;
+            margin: 0;
+        }
+
+        .container .column {
+            float: left;
+            position: relative;
+            height: 100%;
+        }
+
+        .container .middle {
+            width: 100%;
+            background-color: orange;
+        }
+
+        .container .middle .main{
+            width: 100%;
+            margin: 0 200px 0 150px;
+        }
+
+        .container .left {
+            width: 150px;
+            margin-left: -100%;
+            background-color: red;
+        }
+
+        .container .right {
+            width: 200px;
+            margin-left: -200px;
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 中间的宽度是100%，只是让内容显示在指定区域 -->
+    <div class="container">
+        <!-- 按照加载顺序书写加载middle -->
+        <div class="column middle">
+            <div class="main">
+                ???????111111111111111111111？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？aaa
+            </div>
+        </div>
+        <div class="column left"></div>
+        <div class="column right"></div>
+    </div>
+</body>
+
+</html>

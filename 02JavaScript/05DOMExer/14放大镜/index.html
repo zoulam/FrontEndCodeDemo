@@ -41,6 +41,7 @@
             left: 600px;
             top: 100px;
             overflow: hidden;
+            display: none;
         }
 
         #big img {
@@ -53,32 +54,41 @@
     </style>
     <script>
         window.onload = function () {
-            var oSmall = document.getElementById('small');
-            var oBig = document.getElementById('big');
-            var oMark = document.getElementById('mark');
-            var oBigImg = oBig.getElementsByTagName('img')[0];
+            let oSmall = document.getElementById('small');
+            let oBig = document.getElementById('big');
+            let oMark = document.getElementById('mark');
+            let oBigImg = oBig.getElementsByTagName('img')[0];
+            console.log(getComputedStyle(oMark));
+            console.log();
             oSmall.onmouseover = function () {
                 oMark.style.display = 'block';
                 oBig.style.display = 'block';
             }
+
             oSmall.onmouseout = function () {
                 oMark.style.display = 'none';
                 oBig.style.display = 'none';
             }
+
             oSmall.onmousemove = function (e) {
                 var e = e || window.event;
+                // l为mark距离small的距离
                 var l = e.clientX - oSmall.offsetLeft - 50;
                 var t = e.clientY - oSmall.offsetTop - 50;
+
                 //防止出界
                 if (l < 0) {
                     l = 0;
-                } else if (l >= oSmall.width - oMark.width) {
-                    l = oSmall.width - oMark.width;
+                } else if (l >= 170) {
+                    // l = oSmall.width - oMark.width;
+                    l = 170
                 }
+
                 if (t < 0) {
                     t = 0;
-                } else if (t >= oSmall.height - oMark.height) {
-                    t = oSmall.height - oMark.height;
+                } else if (t >= 305) {
+                    // t = oSmall.height - oMark.height;
+                    t = 305
                 }
                 oMark.style.left = l + 'px';
                 oMark.style.top = t + 'px';

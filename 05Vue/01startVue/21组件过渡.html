@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: opacity 1s linear;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <transition mode="out-in">
+            <component :is="type"></component>
+        </transition>
+        <button @click="change">change</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('child1', {
+            template: '<div>one</div>'
+        })
+
+
+        Vue.component('child2', {
+            template: '<div>two</div>'
+        })
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                type: 'child1'
+            },
+            methods: {
+                change: function () {
+                    this.type = this.type === 'child1' ? 'child2' : 'child1'
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

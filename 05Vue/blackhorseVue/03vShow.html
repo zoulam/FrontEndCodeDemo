@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="porn">
+        <button @click="change">切换显示状态</button>
+        <img src="./img/porn.jpg" v-show="isShow">
+        <img src="./img/porn2.jpg" v-show="age>18">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '.porn',
+            data: {
+                isShow: false,
+                age: 19
+            },
+            methods: {
+                change: function () {
+                    this.isShow = !this.isShow;
+                    this.age = -this.age
+                },
+
+            }
+        })
+    </script>
+</body>
+
+</html>

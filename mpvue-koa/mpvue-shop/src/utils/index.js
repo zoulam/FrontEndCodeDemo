@@ -19,7 +19,7 @@ export function formatTime (date) {
 }
 
 
-// ------------------------请求的封装
+// ------------------------请求的封装，后端发送的端口是5757
 
 const host = "http://localhost:5757/lm"
 export { host };
@@ -84,7 +84,7 @@ export function toLogin() {
     return true
   }
 }
-  
+
 
 export default {
   formatNumber,

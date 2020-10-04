@@ -6,7 +6,6 @@ const path = require('path')
 
 const mapDir = d => {
   const tree = {}
-
   // 获取当前文件夹下的所有文件夹和文件，分成两组，文件夹一组，文件一组
   const [dirs, files] = _(fs.readdirSync(d)).partition(p => fs.statSync(path.join(d, p)).isDirectory())
   // 映射文件夹

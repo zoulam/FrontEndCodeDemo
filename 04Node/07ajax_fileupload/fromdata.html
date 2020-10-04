@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="username" value="zhangsan" />
+    <input type="text" id="password" value="123" />
+    <input type="submit" id="submitBtn" value="提交" />
+
+    <script>
+        // new FormData()//构造函数
+        let oUsername = document.getElementById("username"),
+            oPassword = document.getElementById("password"),
+            osubmitBtn = document.getElementById("submitBtn");
+        let fd = new FormData();
+        osubmitBtn.onclick = function () {
+            fd.append('Username', oUsername.value);
+            fd.append('Password', oPassword.value);
+            console.log(fd); // 打印出来的是对象
+
+            console.log(fd.get('Username')+'&'+fd.get('Password'));
+             // zhangsan&123
+             fd.set('Username','lisi')
+            console.log(fd.get('Username')+'&'+fd.get('Password'));
+            // lisi&123
+            console.log(fd.has('Username'));
+            // true
+            fd.delete('Password')
+            console.log(fd.get('Username')+'&'+fd.get('Password'));
+            //lisi&null
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+        }
+
+        .v-enter-active,
+        .v-leave-active{
+            transition: opacity 1s linear;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <transition>
+            <div v-if="show">hello</div>
+            <!-- 此处使用div会被复用，过渡会失效，添加key即可解决 -->
+            <!-- <div v-else>fuck</div>  -->
+            <p v-else>fuck</p>
+        </transition>
+        <button @click="change">change</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                show: true
+            },
+            methods: {
+                change: function () {
+                    this.show = !this.show
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

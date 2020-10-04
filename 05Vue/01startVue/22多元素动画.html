@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: opacity 1s linear;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- transition-group 给每一个li标签自动包裹一层 transition-->
+        <ul>
+            <transition-group mode="out-in">
+                <li v-for="(item,index) of list" :key="item.id">{{item.text}}</li>
+            </transition-group>
+        </ul>
+        <button @click=" add">添加</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let count = 0;
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                list: []
+            },
+            methods: {
+                add: function () {
+                    this.list.push({
+                        text: 'helloworld',
+                        id: count++
+                    })
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

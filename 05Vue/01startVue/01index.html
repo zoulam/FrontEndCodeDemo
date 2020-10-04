@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <button disabled>disable</button>
+        <button @click="handleBtnClick">click me</button>
+        <div>{{user}}</div>
+        <div :style="styleObj">hellworld</div>
+        <input type="text" v-model='userName' />
+        <div>{{userName}}</div>
+        <button>提交</button>
+        <ul>
+            <li v-for="(item, index) in list">{{item}}</li>
+        </ul>
+        <div v-if="false">v-if</div>
+        <div v-else>v-else</div>
+        <div v-html="htmlMSG"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                user: 'zoulam',
+                userName: 'luluxi',
+                list: ['zoulam', 'luluxi', 'lala'],
+                styleObj: {
+                    color: "red"
+                },
+                htmlMSG:`<h1>v-html</h1>`
+            },
+            methods: {
+                handleBtnClick: function () {
+                    console.log('click me');
+                }
+            }
+        })
+        setTimeout(() => {
+            vm.$data.user = 'malouz'
+        }, 500)
+
+
+        // nuxt 写服务端
+        // wexx 写原生app
+        // mpvue 开发小程序
+
+        // m(model数据)v（view视图）vm
+    </script>
+</body>
+
+</html>

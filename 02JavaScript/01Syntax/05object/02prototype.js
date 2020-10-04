@@ -28,5 +28,5 @@ console.log(hp1.screen);//18:9
 console.log(hp2.screen);//18:9
 console.log(hp2.price);
 
-// 覆盖的关系 内部this.[value] > Object.prototype.[value] = Object.prototype = { } >Objetc.[value]
+// 覆盖的关系 内部this.[value] > Object.prototype.[value] = Object.prototype = { } > Function.[value]
 // 三必须声明的new之前，且他存在的话会将二的内容完全覆盖，Object.prototype.[value]内容不重写就会编程undefined

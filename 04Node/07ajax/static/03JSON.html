@@ -1,0 +1,48 @@
+<!-- JSON.html -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #ans {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ans"></div>
+    <script>
+        const ans = document.getElementById('ans');
+        window.onkeydown = function () {
+            const xhr = new XMLHttpRequest();
+            xhr.responseType = "json";
+            xhr.open('GET', 'http://127.0.0.1:8000/json-server')
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        // console.log(xhr.response);
+                        // 手动解析
+                        // let data = JSON.parse(xhr.response);
+                        // ans.innerHTML = `
+                        // 姓名：${data.name}
+                        // 年龄：${data.age}
+                        // `
+
+                        // xhr设置response数据类型，解析 其实更不好用
+                        ans.innerHTML = xhr.response.name;
+                        JSON.stringify
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

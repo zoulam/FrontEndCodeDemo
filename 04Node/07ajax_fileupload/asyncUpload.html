@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            margin-top: 100px;
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 40px;
+            border: 1px solid #666;
+        }
+
+        .progress {
+            width: 0;
+            height: 100%;
+            background-color: green;
+        }
+
+        .error-info {
+            text-align: center;
+            line-height: 40px;
+            font-size: 14px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="file" name="file" id="file" multiple />
+    <input type="submit" value="上传" id="submitBtn">
+    <ul class="progress-wrap">
+        <!-- dom生成 -->
+        <!--<li class="progress-bar">
+            <div class="progress"></div>
+    </li>-->
+    </ul>
+    <script>
+        let oFile = document.getElementById('file')
+        let oSumbitBtn = document.getElementById('submitBtn')
+        let oProgressWrap = document.getElementsByClassName('progress-wrap')[0]
+
+
+        oFile.onchange = function () {
+            // console.log(oFile.files);// 文件对象信息
+            // 包含文件类型、大小、文件名等信息
+
+            let files = oFile.files;
+            let fileLen = files.length;
+            if (fileLen <= 0) {
+                alert('您还没有选择图片')
+                return;
+            }
+            if (fileLen > 5) {
+                alert('单次只能上传五个文件')
+                return;
+            }
+
+            let fileName = '',
+                fileSize = 0,
+                maxSize = 1024 * 1024 * 5,
+                fd = null,
+                errorInfo = '';
+            for (let i = 0; i < fileLen; i++) {
+                fileName = files[i].name;
+                // console.log(fileName);
+                fileSize = files[i].size;
+                if (!/\.(gif|jpg|jpeg|png$)/.test(fileName)) {
+                    errorInfo = `${fileName}不是图片类型`
+                }
+                if (fileSize > maxSize) {
+                    errorInfo = `${fileName}大小超过1M`
+                }
+                let oProgressBar = document.createElement('li');
+                oProgressBar.className = 'progress-bar';
+
+                oProgressWrap.appendChild(oProgressBar);
+                if (errorInfo !== '') {
+                    oProgressBar.innerHTML = ' <span class="error-info">' + errorInfo + '</span>'
+                } else {
+                    oProgressBar.innerHTML = '<div class="progress"></div>'
+                    fd = new FormData();
+                    fd.append('file', files[i]);
+
+                    var xhr = XMLHttpRequest
+                        ? new XMLHttpRequest()
+                        : new ActiveXObject('Microsoft.XMLHTTP');
+                    xhr.open('post', 'files')
+
+                        (function (i) {
+                            xhr.upload.onporogress = function (e) {
+                                let eve = e || window.event;
+                                let percent = eve.loaded / eve.total * 100 + '%',
+                                    thisProgressBar = oProgressWrap.getElementsByClassName('progress-bar')[i];
+                                thisProgressBar.getElementsByClassName('progress')[0].then(value => {
+                                    style.width = percent
+                                });
+                            }
+                        })(i);
+                    xhr.send(fd);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

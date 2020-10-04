@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上传页面</title>
+</head>
+
+<body>
+    <input type="file" id="btnFile">
+    <input type="button" value="上传" onclick="upload(0)" />
+    <script src="./axios.min.js"></script>
+    <script>
+        let btnFile = document.querySelector('#btnFile');
+
+        // 分片上传 1M为一片
+        let chunkSize = 1024 * 1024;
+
+        //index 表示第几个块
+        function upload(index) {
+            let file = btnFile.files[0];
+            let [fname, fext] = file.name.split('.');
+
+
+            let start = index * chunkSize;
+
+            //上传终止,开始合并（merge）
+            if (start > file.size) {
+                merge(file.name);
+                return;
+            }
+
+            //获取区块内容
+            let blob = file.slice(start, start + chunkSize);
+            //为区块命名 ${源文件名}.${区块索引}.${文件类型}
+            let blobName = `${fname}.${index}.${fext}`
+            //将区块转化为File文件
+            let blobFile = new File([blob], blobName)
+            let formData = new FormData();
+            formData.append('file', blobFile);
+
+            // 上传路由
+            axios.post('/upload', formData).then(res => {
+                console.log(res);
+                //一个区块上传完之后递归下一个区块
+                upload(++index);
+            })
+        }
+
+        // 合并路由
+        function merge(name) {
+            axios.post('/merge', { name: name }).then(res => {
+                console.log(res);
+            })
+        }
+    </script>
+</body>
+
+</html>

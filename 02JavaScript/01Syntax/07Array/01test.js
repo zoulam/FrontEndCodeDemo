@@ -1,6 +1,6 @@
 let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 //插入
-console.log(nums.push(10));
+console.log(nums.push(10,11));
 console.log(nums.unshift(-1, 0));
 console.log(nums);
 console.log('-------------------------------------------');

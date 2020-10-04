@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX GET 请求</title>
+    <style>
+        #ans {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <button>get</button>
+    <div id="ans"></div>
+    <script>
+        const btn = document.getElementsByTagName('button')[0];
+        const ans = document.getElementById('ans');
+        btn.onclick = function () {
+            // console.log('test');
+
+            // 1、创建对象
+            const xhr = new XMLHttpRequest();
+            // 2、初始化 设置请求方法和url
+            xhr.open('GET', 'http://127.0.0.1:8000/server?username=zoulam&password=123456');
+            // 3、发送
+            xhr.send();
+            // 4、事件绑定 处理服务端返回的结果
+
+            /*           on:当……时
+                         readystate 就绪状态 xhr对象中的属性
+                         有五个表示状态的值：
+                            0 未初始化
+                            1 open执行
+                            2 send执行
+                            3 服务端返回部分结果
+                            4 服务端返回全部结果
+                         change 改变 */
+
+            xhr.onreadystatechange = function () {
+                // 判断请求是否完全拉取
+                if (xhr.readyState === 4) {
+                    // 判断响应状态码
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        // console.log(xhr.status);// 状态码
+                        // console.log(xhr.statusText);// 状态字符串
+                        // console.log(xhr.getAllResponseHeaders());//所有响应头
+                        // console.log(xhr.response);// 响应体
+
+
+                        ans.innerHTML = xhr.response;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

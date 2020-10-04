@@ -1,0 +1,33 @@
+<!-- 12jsonp验证账号.html -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12jsonp验证账号</title>
+</head>
+
+<body>
+    username: <input type="text" id="username" />
+    <p></p>
+    <script>
+        const inp = document.getElementById('username');
+        const p = document.querySelector('p');
+        function handle(data) {
+            inp.style.border = "solid 1px red";
+            p.innerText = data.msg;
+        }
+        inp.onblur = function () {
+            // 获取用户名
+            let username = this.value;
+            // 发送请求
+            const sc = document.createElement('script');
+            sc.src = 'http://127.0.0.1:8000/logincheck';
+            // 插入文档
+            document.body.appendChild(sc);
+        }
+    </script>
+</body>
+
+</html>

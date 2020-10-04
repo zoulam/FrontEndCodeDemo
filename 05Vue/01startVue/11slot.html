@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <child>
+            <!-- slot被称为插槽，理解成出口 -->
+
+
+            <!-- template不写slot,将会被丢弃 -->
+            <!-- <i class="fa fa-qq"></i>
+            <h1>书籍B</h1> -->
+
+            <!-- 具名插槽 -->
+            <!-- <div v-slot="insert">我被插入slot</div>
+            <strong slot="header">书籍C</strong> -->
+
+
+            <!-- 作用域插槽 -->
+            <!-- slot-scope内传入的是一个对象，里面包含模板中传入的数据 -->
+            <template slot-scope="props">
+                <li>{{props.content}}</li>
+            </template>
+        </child>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('child', {
+            props: ['content'],
+            // slot内可填入默认值，在组件使用时没有传入标签时生效
+            // 匿名（单个/默认）插槽
+            // 接收使用时未被命名的内容
+            // 作用域插槽(scope slot)
+            template: `<div>
+                    <slot content="i am a info"></slot>
+                </div>
+            `
+            // 具名插槽
+            // <div>
+            //     <slot name="header"><p style="color:red">luluxi</p></slot>
+            //     <slot name="insert"></slot>
+            //     <slot name="insert"></slot>
+            //     </div>
+        })
+        const vm = new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+
+</html>

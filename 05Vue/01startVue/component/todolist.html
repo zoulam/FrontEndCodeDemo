@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>component TodoList</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="inputValue" placeholder="please input this" />
+        <button @click="add">add</button>
+        <ul>
+            <li v-for="(item, index) in list">{{item}}</li>
+            <!-- <TodoItem>会报错</TodoItem>  必须使用todo-item命名-->
+            <!-- v-for 从父组件取值然后赋给content -->
+            <todo-item :content="item" v-for="(item, index) in list"></todo-item>
+            <gohome :content="item" :index="index" v-for="(item, index) in list" @delete="deleteElement">
+            </gohome>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 1、组件的全局注册（全局注册会导致即使不使用也会被打包到代码内）
+        // 组件之间可以嵌套
+
+        // 短横线命名kebab-case 如：list-item
+        // 大驼峰PascalCase 如：TodoItem
+        Vue.component('TodoItem', {
+            props: ['content'],
+            template: '<strong><li>全局注册组件：{{content}}</li></strong>'
+        })
+
+
+        // 2、局部注册
+        const BackHome = {
+            props: ['content', 'index'],
+            template: '<strong style="color:red"><li>局部注册组件：{{content}} <button @click="deleteItem()">x</button></li></strong>',
+            methods: {
+                deleteItem: function () {
+                    // $emit 自定义事件 this.index从上方的props取值
+                    this.$emit('delete', this.index)
+                }
+            }
+        }
+
+        const vm = new Vue({
+            el: '#app',
+            components: {
+                // gohome 对组件BackHome重命名
+                gohome: BackHome
+            },
+            data: {
+                inputValue: '',
+                list: ['luluxi']
+            },
+            methods: {
+                add() {
+                    this.list.push(this.inputValue);
+                    this.inputValue = '';
+                },
+                deleteElement(index) {
+                    this.list.splice(index, 1)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

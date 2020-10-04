@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #test1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin: 0 auto;
+        }
+
+        #test2 {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            background-color: blue;
+        }
+
+        .test3 {
+            text-align: center;
+        }
+        .test4{
+            width: 100px;
+            height: 100px;
+            background-color: rgb(182, 142, 142);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="test1">margin</div>
+    <div id="test2">position + tranform</div>
+    <div class="test3">文本、超链接、图片水平居中</div>
+    <div class="test4">flex</div>
+
+</body>
+
+</html>

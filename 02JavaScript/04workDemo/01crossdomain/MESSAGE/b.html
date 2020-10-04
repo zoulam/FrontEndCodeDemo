@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 建通获取的信息
+        window.onmessage = function (ev) {
+            console.log(ev.data);
+            // ev.source:客户端，这里是a页面
+            // ev.origin：请求源
+            ev.source.postMessage(ev.data + 'i am server', ev.origin);
+        }
+    </script>
+</body>
+
+</html>

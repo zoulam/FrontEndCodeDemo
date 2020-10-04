@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 6000px;
+            background-color: pink;
+        }
+
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background: red;
+            border: 5px solid black;
+        }
+
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+
+        #go {
+            height: 200px;
+        }
+
+        span {
+            background-color: aqua;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div id="go"></div>
+    <span>deflgh jmgjhkgjhgjklhjp'omfd'/</span>
+    <div id="box1"></div>
+    <div id="box2"></div>
+
+    <script>
+        let oBox1 = document.getElementById('box1');
+        let oBox2 = document.getElementById('box2');
+
+        // client 只计算可见内容
+        console.log('-----------------------------------client----------------------------------------');
+        console.log(oBox1.clientHeight);// 100
+        console.log(oBox1.clientLeft);// 5
+        console.log(oBox1.clientWidth);// 100
+        console.log(oBox1.clientTop);// 5
+        console.log('-----------------------------------scroll----------------------------------------');
+        console.log(oBox1.scrollHeight);
+        console.log(oBox1.scrollWidth);
+        console.log(oBox1.scrollLeft);
+        console.log(oBox1.scrollLeftMax);
+        console.log(oBox1.scrollTop);
+        console.log(oBox1.scrollTopMax);
+        console.log('-----------------------------------offset----------------------------------------');
+
+
+    </script>
+</body>
+
+</html>

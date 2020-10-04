@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+    <title>Document</title>
+    <style>
+        /* 过渡使用自定义类名，其他用半自定义类名 */
+        .fade-leave-to,
+        .fade-enter {
+            opacity: 0;
+            animation: name timing-function delay iteration-count direction fill-mode;
+        }
+
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 5s linear;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 将fade-enter-active 重命名为enter -->
+        <!-- type="transition" 给type指定较长时间的内容，即此处移除Vue的类名需要5s-->
+        <!-- :duration="2000" 手动绑定时长 2000ms -->
+        <!-- :duration="{}"  -->
+        <transition name="fade" :duration="{enter: 1000, leave: 2000}"
+         enter-active-class="animated tada fade-enter-active"
+            leave-active-class="animated bounceOutRight fade-leave-active">
+            <div v-if="show">hello world</div>
+            <!-- transition只能添加一个元素不然会报错 -->
+            <!-- <div v-if="show">hello world2</div> -->
+        </transition>
+        <button @click="change">change</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                show: false
+            },
+            methods: {
+                change: function () {
+                    this.show = !this.show;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

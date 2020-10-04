@@ -1,0 +1,50 @@
+<!-- 10note.html -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        list-style: none;
+    }
+</style>
+
+<body>
+    <div id="app">
+
+        <button @click="empty">clear</button>
+        <input type="text" v-model="msg2" @keyup.enter="add" />
+        <ul>
+            <li v-for="(item,index) in msg">{{index+1}} {{item}} <button @click="remove(index)">x</button></li>
+        </ul>
+        <h2>{{msg.length}}</h2>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                msg: ["luluxi", "lala", "dd", "momo"],
+                msg2: 'start'
+            },
+            methods: {
+                add: function () {
+                    this.msg.push(this.msg2);
+                    this.msg2 = ''
+                },
+                empty: function () {
+                    this.msg = []
+                },
+                remove: function (index) {
+                    this.msg.splice(index, 1)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

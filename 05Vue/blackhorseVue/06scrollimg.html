@@ -1,0 +1,43 @@
+<!-- 06scrollimg.html -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <img :src="imgArr[index]" alt="">
+        <button href="#" @click="prev" v-show="index!=0">上一张</button>
+        <button href="#" @click="next" v-show="index<imgArr.length-1">下一张</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                imgArr: [
+                    "./img/porn.jpg",
+                    "./img/porn2.jpg",
+                    "./img/porn3.jpg",
+                    "./img/porn4.jpg",
+                    "./img/porn5.jpg"
+                ],
+                index: 0
+            },
+            methods: {
+                prev: function () {
+                    this.index = --this.index;
+                },
+                next: function () {
+                    this.index = ++this.index;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

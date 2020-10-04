@@ -1,0 +1,31 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+</head>
+
+<body>
+    <h1>luluxi</h1>
+    <button>get data</button>
+    <script>
+        const btn = document.querySelector('button');
+        btn.onclick = function () {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', '/data');
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300){
+                        console.log(xhr.response);
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

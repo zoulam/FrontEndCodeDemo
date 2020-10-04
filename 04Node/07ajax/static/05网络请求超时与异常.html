@@ -1,0 +1,44 @@
+<!-- 网络请求超时与异常.html -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网络超时与异常请求</title>
+    <style>
+        #ans {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <button>发送请求</button>
+    <div id="ans"></div>
+    <script>
+        const btn = document.getElementsByTagName('button')[0];
+        const ans = document.querySelector('#ans');
+        btn.addEventListener('click', () => {
+            const xhr = new XMLHttpRequest();
+            xhr.timeout = 2000;
+            xhr.ontimeout = function () {
+                alert('当前网络状态不佳，请稍后重试')
+            }
+            xhr.onerror = function () {
+                alert('无网络连接')
+            }
+            xhr.open('GET', 'http://127.0.0.1:8000/outtime');
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300) {
+                    ans.innerHTML = xhr.response;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

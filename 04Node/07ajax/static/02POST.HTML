@@ -1,0 +1,43 @@
+<!-- POST.HTML -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POST</title>
+    <style>
+        #ans {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ans"></div>
+    <script>
+        const ans = document.getElementById('ans');
+        ans.addEventListener('mouseover', function () {
+            const xhr = new XMLHttpRequest();
+            // 请求行
+            xhr.open('POST', 'http://127.0.0.1:8000/server')
+            // 请求头
+            xhr.setRequestHeader('Content-Type','application/x-www-from-urlencode');
+            // 设置自定义的请求头浏览的安全机制会报错，需要后端配合
+            xhr.setRequestHeader('name','zoulam');
+            // 请求体
+            xhr.send('username=zoulam&password=123456');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        ans.innerHTML = xhr.response;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

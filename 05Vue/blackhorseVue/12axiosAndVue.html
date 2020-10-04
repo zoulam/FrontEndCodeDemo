@@ -1,0 +1,37 @@
+<!-- 12axiosAndVue.html -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="获取笑话" @click="getJoke">
+        <p v-for="item in msg">{{item}}</p>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                msg: ["儿子啊，我是你爸爸！"]
+            },
+            methods: {
+                getJoke: function () {
+                    axios.get("https://autumnfish.cn/api/joke/list?num=6")
+                        .then((value) => {
+                            this.msg = []
+                            this.msg = this.msg.concat(value.data.jokes);
+                        })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

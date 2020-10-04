@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">click me</button>
+    <script>
+        var oBtn = document.getElementById('btn');
+        oBtn.onclick = function () {
+            // console.log(this);// <button id="btn">click me</button>
+            // this 指向绑定了事件的元素节点（Obtn）
+            this.innerText = 'loading ……'
+            this.disabled = true;
+            // 使用普通函数无法恢复
+
+            // var _this = this;
+            // setTimeout(function () {
+            //     console.log(this);// window
+            //     console.log(_this);// oBtn
+            //     _this.innerText = 'click me'
+            //     _this.disabled = false;
+            // }, 1000)
+
+            // call/apply 修改this指向，立即执行
+            //       call(conetxt, arg2, arg3……)
+            //       apply(conetxt, [arg2, arg3……])
+
+            // bind 修改this指向，不是立即执行
+            //      bind(conetxt, arg2, arg3……)
+            var _this = this;
+            setTimeout(function () {
+                console.log(this);// oBtn
+                this.innerText = 'click me'
+                this.disabled = false;
+            }.bind(this), 1000)//这里绑定外层this oBtn
+
+
+            // 箭头函数可以箭头函数的this指向的是它外层对象
+            // setTimeout(() => {
+            //     this.innerText = 'click me'
+            //     this.disabled = false;
+            // }, 1000)
+
+        }
+    </script>
+</body>
+
+</html>

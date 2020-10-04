@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 5000px;
+        }
+        .father {
+            width: 200px;
+            height: 1000px;
+            background-color: green;
+        }
+
+        #btn {
+            position: absolute;
+            left: 20px;
+            top: 200px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="father"> <button id="btn">click</button></div>
+    <script>
+        let oBtn = document.getElementById('btn');
+        console.log('-----------------------------------mouseEvent offserX pageX client X screenX----------------------------------------');
+        oBtn.onclick = function (e) {
+            let t = e.target;
+            console.log('客户端（相对客户端，滚动后不变）', e.clientX);
+            console.log('偏移【测试中，慎用】（相对父元素的padding距离）', e.offsetX);
+            console.log('屏幕(全屏时发生变化)', e.screenX);
+            console.log('页面（滚动时发生变化）', e.pageY);
+            console.log('---------------------------------------------------------------------------');
+        }
+
+    </script>
+</body>
+
+</html>

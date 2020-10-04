@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <child content="123456"></child>
+        <child2 val="123456"></child2>
+        <btn-count count="2"></btn-count>
+        <btn-count count="3"></btn-count>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('BtnCount', {
+            // 直接修改 props 会导致其他组件也受影响
+            // count的值是从父组件传来的，即：父组件可以改变子组件的值而反过来不行（单项数据流）
+            data() {
+                return {
+                    number: this.count,
+                }
+            },
+            props: {
+                // String和Number 提供数据校验,即只能传入规定的数据类型
+                count: [String, Number],
+            },
+            template: '<button @click="add">{{count}}</button>',
+            methods: {
+                add: function () {
+                    this.number++;
+                }
+            }
+        })
+
+        Vue.component('child', {
+            props: {
+                content: {
+                    // 自定义的验证器 return false在控制台报错
+                    validator: function (value) {
+                        // if (value.length < 7) alert('账号过短')
+                        return value.length > 5
+                    },
+                    type: String,
+                    required: false,// true设置必须传入值，不然报错,默认值是false
+                    default: 'this is default value'
+                }
+            },
+            template: '<p>{{content}}</p>',
+        })
+
+        Vue.component('child2', {
+            // props: ['content'],
+            // 未被定义props接收属性，即p中是取不到的，只会被挂载在div内
+            // inheritAttrs设置为false $attrs
+            // 组件的使用场景不明确
+            template: `<div>
+                <p>{{content}}</p>
+            </div>`,
+        })
+        const vm = new Vue({
+            el: '#app',
+        })
+    </script>
+</body>
+
+</html>

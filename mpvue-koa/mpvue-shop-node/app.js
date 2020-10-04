@@ -7,6 +7,7 @@ const config = require('./config')
 // 解析请求体
 app.use(bodyParser())
 
+// 引入路由配置
 const router = require('./routes')
 app.use(router.routes())
 

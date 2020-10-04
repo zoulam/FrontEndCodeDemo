@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            list-style: none;
+        }
+
+        body {
+            height: 10000px;
+        }
+    </style>
+</head>
+
+<body>
+    <a style="background-color: red;" href="www.baidu.com">百度</a>
+    <div class="wrap">
+        <ul class="img-list J_imgList"></ul>
+    </div>
+    <div style="display: none;" id="J_data">
+        [{ "img": "../static/1.jpg", "name": "pic1" },
+        { "img": "../static/2.jpg", "name": "pic2" },
+        { "img": "../static/3.jpg", "name": "pic3" },
+        { "img": "../static/4.jpg", "name": "pic4" }]
+    </div>
+    <script type="text/html" id="J_imgTpl">
+        <li class="img-item">
+            <div class="img-wrap">
+                <img src="../static/none.png" class="list-img" data-src="{{img}}" alt="{{name}}" />
+            </div>
+            <div class="img-tt">
+                <h1>{{name}}</h1>
+            </div>
+        </li>
+    </script>
+    <script src="../utils/DOMUtils.js"></script>
+    <script src="../utils/lazyLoader.js"></script>
+</body>
+
+</html>

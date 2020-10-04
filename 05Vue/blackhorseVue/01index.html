@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>primer</title>
+</head>
+
+<body>
+    {{msg}}
+    <div id="app" class="app">{{msg}}
+        <span>{{msg}}</span>
+        <h2>{{pp}}</h2>
+        <h2>{{pp.age}}</h2>
+        <h2>{{pp.name}}</h2>
+        <ul>
+            <li>{{momo[0]}}有效输出</li>
+            <li>{{momo[1]}}</li>
+            <li v-text="msg"> 无效输出</li>
+            <li v-html="html"></li>
+        </ul>
+        <button value="event" @click="dodo">show</button>
+        <button value="event" @dblclick="dodo">doubleclick show</button>
+        <button @click="sleep">{{name}}</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            // el:'#app',
+            el: '.app',
+            data: {
+                name:'zoulam',
+                html: '<a href="#">我是一个超链接</a>',
+                msg: 'dog',
+                pp: {
+                    age: 18,
+                    name: 'luluxi'
+                },
+                momo: ['angle', 'dundun'],
+            },
+            methods: {
+                dodo: function () {
+                    console.log('hello vue');
+                },
+                sleep:function(){
+                    this.name=this.name+'goto sleep'
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

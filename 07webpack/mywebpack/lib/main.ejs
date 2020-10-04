@@ -1,0 +1,27 @@
+(function (modules) {
+var installedModules = {};
+// 实现__webpack_require__方法
+function __webpack_require__(moduleId) {
+if (installedModules[moduleId]) {
+return installedModules[moduleId].exports;
+}
+var module = installedModules[moduleId] = {
+i: moduleId,
+l: false,
+exports: {}
+};
+modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+module.l = true;
+return module.exports;
+}
+return __webpack_require__(__webpack_require__.s = "<%-entryId%>");
+})
+// 这是立即执行函数的超长参数以键（路径）值（一个文件）对存在的内容
+({
+<%for(let key in modules){%>
+"<%-key%>":
+(function (module, exports, __webpack_require__) {
+eval(`<%-modules[key]%>`);
+}),
+<%}%>
+});

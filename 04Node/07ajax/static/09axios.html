@@ -1,0 +1,85 @@
+<!-- axios.html -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>axios</title>
+    <script crossorigin="anonymous" src="https://cdn.bootcdn.net/ajax/libs/axios/0.20.0/axios.min.js"></script>
+
+</head>
+
+<body>
+    <button>GET</button>
+    <button>POST</button>
+    <button>通用型方法ajax</button>
+    <script>
+        const btns = document.getElementsByTagName('button');
+        axios.defaults.baseURL = 'http://127.0.0.1:8000'
+        btns[0].onclick = function () {
+            axios.get('/axios-server', {
+                // url 参数
+                params: {
+                    id: 'zoulam',
+                    age: 18
+                },
+                header: {
+                    name: 'luluxi',
+                    age: 16
+                }
+            }).then(value => {
+                console.log(value);
+                console.log(value.data);
+            });;
+        }
+
+        btns[1].onclick = function () {
+            axios.post('/axios-server',
+                // 体
+                {
+                    username: 'zoulam',
+                    password: '123456',
+                }, {
+                // url
+                params: {
+                    id: 12,
+                    vip: 6
+                },
+                // 头
+                headers: {
+                    dd: 'cat',
+                    age: 15
+                }
+            })
+        }
+
+        btns[2].onclick = function () {
+            axios({
+                method: 'POST',
+                url: '/axios-server',
+                params: {
+                    vip: 10,
+                    level: 30
+                },
+                headers: {
+                    a: 100,
+                    b: 200
+                },
+                data: {
+                    username: 'zoulam',
+                    password: '123456'
+                }
+            }).then(value => {
+                console.log(value);
+                console.log(value.status);
+                console.log(value.statusText);
+                console.log(value.headers);
+                console.log(value.data);
+            });
+        }
+
+    </script>
+</body>
+
+</html>

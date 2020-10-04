@@ -26,6 +26,7 @@ const handleUserRouter = (req, res) => {
         const result = login(username, password);
         return result.then(value => {
             if (value.username) {
+                // 设置session
                 // value.username 是从数据库中取出的值
                 req.session.username = value.username;
                 req.session.realName = value.realname;

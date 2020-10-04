@@ -1,0 +1,40 @@
+<!-- 05targetCurTarget.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .a {
+            background-color: red;
+
+        }
+
+        .b {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="a">a father
+        <div class="b">b children</div>
+    </div>
+
+    <script>
+        let a = document.getElementsByClassName('a')[0];
+        let b = document.getElementsByClassName('b')[0];
+        function handler(e) {
+            console.log('target: ', e.target);
+            console.log('target: ', e.target === this);
+            console.log('currentTarget: ', e.currentTarget);
+            console.log('currentTarget: ', e.currentTarget === this);
+            console.log('-------------------------------------------');
+        }
+        a.addEventListener('click', handler, false);
+    </script>
+</body>
+
+</html>

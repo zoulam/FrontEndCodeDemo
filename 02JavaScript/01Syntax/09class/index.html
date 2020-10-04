@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Person {
+            static name = 'god';
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            fun() {
+                console.log('i am fun');
+                console.log(Person.name);
+                console.log(this.name);
+            }
+        }
+        console.log('i am person', Person);
+        let man = new Person('lala', 18);
+
+        console.log(man);
+        man.fun()
+        console.log(man.age);
+    </script>
+</body>
+
+</html>

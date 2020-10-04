@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: black;
+        }
+
+        .equicrural-triangle {
+            width: 0px;
+            height: 0px;
+            border: 50px solid blue;
+            border-top: none;
+            border-color: transparent transparent blue transparent;
+        }
+
+        .hexagon-1 {
+            position: relative;
+            width: 100px;
+            height: 173.2px;
+            background-color: red;
+            margin: 0 auto;
+        }
+
+        .hexagon-1::before,
+        .hexagon-1::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-top: 86.6px solid transparent;
+            border-bottom: 86.6px solid transparent;
+        }
+
+        .hexagon-1::before {
+            left: -50px;
+            border-right: 50px solid green;
+        }
+
+        .hexagon-1::after {
+            right: -50px;
+            border-left: 50px solid green;
+        }
+
+
+
+        .hexagon-2 {
+            position: relative;
+            width: 100px;
+            height: 172.2px;
+            margin: 0 auto;
+            margin-top: 15px;
+            border-bottom: 1px solid #000;
+            border-top: 1px solid #000;
+        }
+
+        .hexagon-2::before,
+        .hexagon-2::after {
+            width: 100px;
+            height: 173.2px;
+            content: "";
+            display: block;
+            top: -1px;
+            left: 0px;
+            position: absolute;
+            box-sizing: border-box;
+        }
+
+        .hexagon-2::before {
+            border-bottom: 1px solid #000;
+            border-top: 1px solid #000;
+            transform: rotate(60deg);
+        }
+
+        .hexagon-2::after {
+            border-bottom: 1px solid #000;
+            border-top: 1px solid #000;
+            transform: rotate(-60deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="circle"></div>
+    <div class="equicrural-triangle"></div>
+    <div class="hexagon-1">正六边形</div>
+    <div class="hexagon-2">旋转三个长方形
+        <div class="item"></div>
+    </div>
+</body>
+
+</html>

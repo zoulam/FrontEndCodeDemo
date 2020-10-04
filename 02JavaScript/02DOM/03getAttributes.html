@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getAttributes</title>
+</head>
+
+<body>
+    <input v-model='value' name="luluxi" id="inp" />
+    <button id="btn">click me</button>
+</body>
+<script>
+    let oInp = document.getElementById('inp')
+    let oBtn = document.getElementById('btn');
+    oBtn.onclick = function () {
+        console.log(oInp.nodeType);
+        console.log(oInp.nodeName);
+        console.log(oInp.nodeValue);
+        console.log(oInp.attributes);
+        console.log(oInp.attributes.name);
+        let values = [...oInp.attributes];
+        values.forEach(item => {
+            let { name, value } = item;
+            console.log(name,value);
+        })
+
+    }
+</script>
+
+</html>

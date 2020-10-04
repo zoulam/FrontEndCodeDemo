@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsonp</title>
+    <style>
+        #ans {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ans"></div>
+    <script>
+        function handle(data) {
+            const ans = document.getElementById('ans');
+            ans.innerHTML = data.name;
+        }
+    </script>
+    <script src="http://127.0.0.1:8000/jsonp-server"></script>
+</body>
+
+</html>

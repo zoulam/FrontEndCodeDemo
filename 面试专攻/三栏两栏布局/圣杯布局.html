@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            min-width: 700px;
+        }
+        html,
+        body,
+        .container {
+            height: 1000%;
+            margin: 0;
+        }
+
+        .container {
+            margin: 0 200px 0 150px;
+        }
+
+        .container .column {
+            float: left;
+            position: relative;
+            height: 200px;
+        }
+
+        .container .middle {
+            /*  无法确定的就设置为100% */
+            width: 100%;
+            background-color: green;
+        }
+
+        .container .left {
+
+            margin-left: -100%;
+            /* left: -150px; */
+            width: 150px;
+            background-color: orange;
+        }
+
+        .container .right {
+            width: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 按照加载顺序书写加载middle -->
+        <div class="column middle"></div>
+        <div class="column left"></div>
+        <div class="column right"></div>
+    </div>
+</body>
+
+</html>

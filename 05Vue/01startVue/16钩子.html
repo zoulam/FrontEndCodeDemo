@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- velocity.js库实现动画 -->
+        <transition name="fade" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+            <div v-if="show">hello world</div>
+        </transition>
+        <button @click="change">change</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                show: false
+            },
+            methods: {
+                change: function () {
+                    this.show = !this.show;
+                },
+                beforeEnter: function (el) {
+                    el.style.color = "red"
+                },
+                enter: function (el, done) {
+                    setTimeout(() => {
+                        el.style.color = "purple"
+                        done();
+                    }, 1000)
+
+                },
+                //afterEnter 要在enter执行完之后触发（done()）
+                afterEnter: function (el) {
+                    setTimeout(() => {
+                        el.style.color = "blue"
+                    }, 1000)
+
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

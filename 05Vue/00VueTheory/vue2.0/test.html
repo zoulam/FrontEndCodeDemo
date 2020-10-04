@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="user.name" />
+        <div>{{user.name}}</div>
+    </div>
+    <script src="./MVVM.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                user: {
+                    name: 'zoulam',
+                    age: '18',
+                },
+                message: `<h1>hello world</h1>`
+            },
+            computed: {
+                getNewName() {
+                    return this.user.name + '玩家'
+                }
+            },
+            methods: {
+                change() {
+                    this.user.age = '100'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

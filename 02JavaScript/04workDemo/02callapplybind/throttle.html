@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="input" />
+    <script>
+        let oInput = document.getElementById('input');
+        function check() {
+            var val = this.value;
+            if(val.length<6){
+                console.log('invalid length');
+            }else{
+                console.log('login success');
+            }
+        }
+        oInput.onkeyup = throttle(check, 1000);
+        function throttle(fn, delay) {
+            let t = null;
+            let begin = Date.now();
+            return function () {
+                let _self = this;
+                let args = arguments;
+                let cur = Date.now();
+
+                clearTimeout(t);
+                if (cur - begin > delay) {
+                    fn.apply(_self, args);
+                    begin = cur;
+                } else {
+                    t = setTimeout(() => {
+                        fn.apply(_self, args);
+                    }, delay)
+
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 插在这里的是自定义事件，插入在template的才是原生事件 -->
+        <child @click="show"></child>
+        <!-- 使用.native监听原生事件 -->
+        <child2 @click.native="show"></child2>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('child', {
+            // 注册原生事件
+            template: '<div @click="childShow">child</div>',
+            methods: {
+                childShow: function () {
+                    // 自定义事件需要使用$emit监听
+                    this.$emit('click')
+                }
+            }
+        })
+
+        Vue.component('child2', {
+            template: '<div >i am child2</div>',
+        })
+        const vm = new Vue({
+            el: '#app',
+            methods: {
+                show: function () {
+                    alert('show info')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

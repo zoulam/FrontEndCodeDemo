@@ -1,0 +1,33 @@
+<!-- fetch.html -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fetch</title>
+</head>
+
+<body>
+    <button>ajax请求</button>
+    <script>
+        const btn = document.getElementsByTagName('button');
+        btn[0].onclick = function () {
+            fetch('http://127.0.0.1:8000/fetch-server',{
+                method:'POST',
+                headers:{
+                    name:'zoulam'
+                },
+                body:'usernmme=zoulam&password=123456'
+            }).then(value => {
+                // return value.text();
+                return value.json();
+            }).then(value => {
+                console.log(value);
+
+            });
+        }
+    </script>
+</body>
+
+</html>

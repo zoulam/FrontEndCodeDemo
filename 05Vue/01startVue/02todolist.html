@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model="inputValue" placeholder="please input todolist"/> <button @click="add">添加</button>
+        <ul>
+            <li v-for=" (item, index) in list">{{item}}</li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                inputValue: '',
+                msg: '请在此处输入内容',
+                list: []
+            },
+            methods: {
+                remove() {
+                    this.msg = null;
+                },
+                add() {
+                    this.list.push(this.inputValue);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

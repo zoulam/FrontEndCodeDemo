@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <iframe id="iframe" src="http://localhost:8002/MESSAGE/b.html" frameborder="0" style="display: none;"></iframe>
+    <script>
+        iframe.onload = function () {
+            iframe.contentWindow.postMessage('zoulam postmessage','http://localhost:8002/')
+        }
+
+        window.onmessage = function (ev) {
+            console.log(ev.data);
+        }
+    </script>
+</body>
+
+</html>

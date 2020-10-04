@@ -1,0 +1,52 @@
+<!-- 07vFor.html -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="add">add</button>
+        <button @click="remove">remove</button>
+        <ul>
+            <li v-for="(item,index) in msg">
+                {{index+1}}分区: {{item}}
+            </li>
+            <h2 v-for="(item,index) in objArr" :title="item.name">
+                {{item.name}}
+            </h2>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                msg: ["衬衫", "牛仔裤", "球鞋", "袜子", "帽子"],
+                objArr: [
+                    {
+                        name: "luluxi",
+
+                    }, {
+                        name: "dundun",
+
+                    }
+                ]
+            },
+            methods: {
+                add: function () {
+                    this.objArr.push({ name: "kunkun" })
+                },
+                remove: function () {
+                    this.objArr.shift();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

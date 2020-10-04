@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .active {
+        border: 1px red solid;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <button @click="change">change</button>
+        <!-- <img :src="msg" :title="tt" :class="{active:isActive}"> -->
+        <img :src="msg" :title="tt" :class="isActive?'active':''">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                msg: "./img/porn4.jpg",
+                tt: "picture",
+                isActive: false
+            },
+            methods: {
+                change: function (){
+                        this.isActive = !this.isActive
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

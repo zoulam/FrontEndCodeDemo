@@ -99,7 +99,7 @@ const handleBlogRouter = (req, res) => {
     }
 
     // 删除博客
-    if (method === 'POST' && req.path === '/api/blog/delete') {
+    if (method === 'POST' && req.path === '/api/blog/del') {
         // 需要登录才能有author数据此处先模拟
         // req.body.author = 'luluxi';
 

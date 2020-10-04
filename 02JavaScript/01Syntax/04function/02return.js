@@ -3,7 +3,7 @@
 function test1(){}
 console.log(test1());//默认返回值是undefined
 console.log('-------------------------------------------');
-// 2
+// 2 return的覆盖
 function Compute() {
     this.add = function (a, b) {
         console.log(a + b);
@@ -15,9 +15,10 @@ function Compute() {
 
 var compute = new Compute();
 compute.add(1, 2);
-console.log(compute);//[];
+console.log(compute);//[] Compute { add: [Function] }
 
-// 3
+console.log('-------------------------------------------');
+//  async函数的返回值是Promise
 async function getUsername() {
     setTimeout(() => {
         console.log(`i am lihua`);
@@ -28,6 +29,6 @@ console.log(getUsername());
 // Promise { undefined }
 // i am lihua
 
-// async函数的返回值是Promise
+
 
 

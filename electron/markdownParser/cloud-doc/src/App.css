@@ -1,0 +1,37 @@
+.icon-button {
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+.search-item {
+  height: 60px;
+}
+
+.c-link {
+  cursor: pointer;
+}
+
+.start-page {
+  font-size: 50px;
+  text-decoration: dashed;
+  text-align: center;
+  opacity: 0.5;
+}
+
+.left-panel {
+  /* 意思是最小高度也是100视窗（即填满） */
+  min-height: 100vh;
+  position: relative;
+}
+
+.button-group {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+/* 去除圆角 */
+.no-border {
+  border-radius: 0 !important;
+}

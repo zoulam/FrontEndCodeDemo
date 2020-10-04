@@ -4,7 +4,8 @@ const readline = require('readline');
 
 
 const fileName = path.join(__dirname, '../', '../', 'logs', 'access.log');
-
+console.log(fileName);
+// F:\Code\vscode\FrontEndCodeDemo\04Node\04BlogDEMO\04blog1\logs\access.log
 // 创建read stream
 const readStream = fs.createReadStream(fileName);
 
@@ -13,9 +14,9 @@ const readStream = fs.createReadStream(fileName);
 const rl = readline.createInterface({
     input: readStream
 })
-
 let chromeNum = 0;
 let sum = 0;
+// lineData 就是读取的数据
 rl.on('line', (lineData) => {
     if (!lineData) { // 剔除空行
         return

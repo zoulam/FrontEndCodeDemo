@@ -3,6 +3,8 @@ var obj = {
     a: 1,
     b: 2
 }
+
+console.log('b' in obj);
 console.log('c' in obj);
 console.log(obj.a);
 

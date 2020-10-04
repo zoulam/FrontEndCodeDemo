@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组扩展方法</title>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <div id="data" style="display: none">
+        [{
+        "id":"1",
+        "name":"zoulam",
+        "age":"18"
+        },
+        {
+        "id":"2",
+        "name":"zoulam",
+        "age":"18"
+        },
+        {
+        "id":"3",
+        "name":"zoulam",
+        "age":"18"
+        },
+        {
+        "id":"4",
+        "name":"zoulam",
+        "age":"18"
+        }]
+    </div>
+    <script>
+        let data = JSON.parse(document.getElementById('data').innerHTML);
+        // console.log(odata);
+        // let oLi = document.getElementsByTagName('li');
+        // data.forEach(function (element, index, array) {
+        //     oLi[index].innerHTML = element.name;
+        //     console.log(this);
+        // }, { name: 'normal function' });
+        data.forEach(function (element, index, array) {
+            this[index].innerHTML = element.name;
+            // console.log(this);
+        }, oLi);
+
+
+        data.forEach((element, index, array) => {
+            oLi[index].innerHTML = element.name;
+            console.log(this);
+        }, { name: 'arrow function' });
+
+
+        // 手写forEach
+        Array.prototype.myForeach = function (fn) {
+            let arr = this;
+            let len = arr.length;
+            let arg2 = arguments[1] || window;
+            for (let i = 0; i < len; i++) {
+                fn.apply(arg2, [arr[i], i, arr])
+            }
+
+        }
+    </script>
+</body>
+
+</html>

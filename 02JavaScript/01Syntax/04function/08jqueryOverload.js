@@ -1,6 +1,6 @@
 function addMethod(object, name, f) {
     var old = object[name];
-    object[name] = function() {
+    object[name] = function () {
         // f.length为函数定义时的参数个数
         // arguments.length为函数调用时的参数个数
         if (f.length === arguments.length) {

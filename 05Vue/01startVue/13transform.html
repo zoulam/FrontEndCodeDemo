@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .fade-enter {
+            opacity: 0;
+        }
+
+        /* opacity后面失效，且被持续监控 */
+        .fade-enter-active {
+            transition: opacity 2s linear;
+        }
+
+        .fade-leave {}
+
+        .fade-leave-to {
+            opacity: 0;
+            color: purple;
+        }
+
+        /* opacity后面失效，且被持续监控 */
+        .fade-leave-active {
+            transition: opacity 2s linear;
+        }
+
+        .fade-enter-to {}
+
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 在元素插入前 vue会添加两个类名
+            插入前v-enter v-enter-active
+         -->
+
+        <!-- 插入后下一帧：vue
+            去除v-enter
+            添加v-enter-to
+         -->
+
+        <!-- 动画结束后
+            去除剩下的两个类
+            v-enter-active v-enter-to
+
+         -->
+        <!-- 默认类名是v开头 -->
+        <transition name="fade">
+            <div v-if="show">hello world</div>
+            <!-- transition只能添加一个元素不然会报错 -->
+            <!-- <div v-if="show">hello world2</div> -->
+        </transition>
+        <button @click="change">change</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                show: false
+            },
+            methods: {
+                change: function () {
+                    this.show = !this.show;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

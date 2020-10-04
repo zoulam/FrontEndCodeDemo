@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.min.js"></script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- velocity.js库实现动画 -->
+        <transition name="fade" @before-enter="beforeEnter" @enter="Enter" @after-enter="afterEnter"
+            @before-leave="beforeLeave" @leave="Leave" @after-leave="afterLeave">
+            <div v-if="show">hello world</div>
+        </transition>
+        <button @click="change">change</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                show: false
+            },
+            methods: {
+                change: function () {
+                    this.show = !this.show;
+                },
+                beforeEnter: function (el) {
+                    el.style.opacity = 0
+                    console.log('进场动画即将执行');
+                },
+                Enter: function (el, done) {
+                    Velocity(el, {
+                        opacity: 1
+                    }, {
+                        duration: 1000,
+                        complete: done
+                    })
+                    console.log('进场动画执行中……');
+
+                },
+                //afterEnter 要在enter执行完之后触发（done()）
+                afterEnter: function (el) {
+                    console.log('进场动画完成');
+                },
+                beforeLeave: function (el) {
+                    el.style.opacity = 0;
+                    console.log('离场动画即将执行');
+                },
+                Leave: function (el, done) {
+                    Velocity(el, {
+                        opacity: 0
+                    }, {
+                        duration: 1000,
+                        complete: done
+                    })
+                    console.log('离场动画执行中……');
+                },
+                afterLeave: function () {
+                    console.log('离场动画执行完成');
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

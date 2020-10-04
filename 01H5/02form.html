@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 260px;
+            height: 232px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>section</section>
+    <form action="">
+        text:<input type="text" />
+        file:<input type="file" />
+        button:<input type="button" value="click me" />
+        sumbit: <input type="sumbit" />
+        output: <output>test</output>
+    </form>
+    <div style="width: 100%; background-color: rgb(145, 178, 101);">output</div>
+    <form oninput="result.value=parseInt(a.value)+parseInt(b.value)">
+        <input type="range" name="b" value="50" /> +
+        <input type="number" name="a" value="10" /> =
+        <output name="result"></output>
+    </form>
+    <div style="width: 100%; background-color: rgb(145, 178, 101);">datalist</div>
+    <label>Choose a browser from this list:
+        <input list="browsers" name="myBrowser" /></label>
+    <datalist id="browsers">
+        <option value="Chrome">
+        <option value="Firefox">
+        <option value="Internet Explorer">
+        <option value="Opera">
+        <option value="Safari">
+    </datalist>
+    <div style="width: 100%; background-color: rgb(145, 178, 101);">map area 给图片添加热点(即可以点击的超链接)</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!-- 取消请求.html -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>取消请求</title>
+</head>
+
+<body>
+    <button>send</button>
+    <button>cancel</button>
+    <script>
+        const btn = document.querySelectorAll('button');
+        let x = null;
+        btn[0].onclick = function () {
+            x = new XMLHttpRequest();
+            x.open('GET', 'http://127.0.0.1:8000/outtime')
+            x.send();
+        }
+        btn[1].onclick = function () {
+            x.abort();
+        }
+    </script>
+</body>
+
+</html>

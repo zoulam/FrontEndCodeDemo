@@ -1,0 +1,20 @@
+let x;
+x = ['hello', 10];
+var Color;
+(function (Color) {
+    Color[Color["Red"] = 1] = "Red";
+    Color["Green"] = "2";
+    Color[Color["Blue"] = 4] = "Blue";
+})(Color || (Color = {}));
+let c = Color.Green;
+let g = Color.Red;
+let d = Color['2'];
+console.log(typeof c);
+console.log(typeof g);
+console.log(Object.prototype.toString.call(d));
+console.log("-----------------------------------------------------------------------");
+let a = undefined;
+let e = null;
+let f = Symbol('1');
+create({ prop: 0 });
+create(null);

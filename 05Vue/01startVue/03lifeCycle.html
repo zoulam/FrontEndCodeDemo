@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命周期</title>
+</head>
+
+<body>
+    <div id="app">
+        <strong>{{allName}}</strong><br />
+        <strong>{{fullName}}</strong><br />
+        <span style="color:red">{{message}}</span> <br />
+        <span style="color:red">{{reverseMessage}}</span> <br />
+        <span style="color:red">{{newMessage()}}</span> <br />
+        <input type="text" v-model="msg" />
+        <div>{{msg + ' caonima'}}</div>
+        <div v-html="rowHtml"></div>
+        <div v-text="rowHtml"></div>
+        <span v-once>{{msg}}</span>
+        <br />
+        <span>{{flag ? 'caonima' : 'wo zhi shi ge bao bao'}}</span>
+        <br />
+        <span>{{flag && msg}}</span>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            // template: '<div>hello world</div>',
+            data: {
+                firstName: '我是',
+                secondName: '你爹',
+                fullName: '我是你爹',
+                // allName: this.firstName + this.secondName,// 这里不是正常表达式 输出NaN
+                message: 'hello world',
+                msg: 'this is a data',
+                rowHtml: '<h1 style="color:red">this v-html</h1>',
+                flag: true
+            },
+            methods: {
+                newMessage: function () {
+                    console.log('methods run');
+                    return this.message.split(' ').reverse().join(' ')
+                }
+            },
+            // computed 只有在相关的属性（此处是message）发生变化才计算(官方文档写的是会被缓存)
+            // 使用methods计算属性，则是每一个数据发生变化就会执行
+            // computed methods watch
+            computed: {
+                // 此处的allName、reverseMessage也属于data内的值，即会产生冲突
+                allName: {
+                    get() {
+                        return this.firstName + this.secondName;
+                    },
+                    set:function(value) {
+                        console.log(this);
+                        let arr = value.split(' ')
+                        this.firstName = arr[0];
+                        this.secondName = arr[1];
+                    }
+                },
+                //计算属性的getter函数
+                reverseMessage: function () {
+                    // console.log('computed run');
+                    return this.message.split(' ').reverse().join(' ')
+                }
+            },
+            watch: {// 侦听函数，有缓存
+                firstName: function () {
+                    console.log('watch');
+                    this.fullName = this.firstName + this.secondName;
+                },
+                secondName: function () {
+                    console.log('watch');
+                    this.fullName = this.firstName + this.secondName;
+                }
+            },
+            beforeCreate: function () {
+                console.log(this.$el);
+                console.log('beforCreate');
+            },
+            created: function () {
+                console.log(this.$el);
+                console.log('created');
+            },
+            beforeMount: function () {
+                console.log(this.$el);
+                console.log('beforeMount');
+            },
+            mounted: function () {
+                console.log(this.$el);
+                console.log('mounted');
+            },
+            beforeDestroy: function () {
+                console.log('run beforeDestroy');
+            },
+            destroyed: function () {
+                console.log(' run destroyed');
+            },
+            beforeUpdate: function () {
+                console.log(this.msg);
+                console.log('run beforeUpdate');
+            },
+            updated: function () {
+                console.log(this.msg);
+                console.log('run updated');
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>

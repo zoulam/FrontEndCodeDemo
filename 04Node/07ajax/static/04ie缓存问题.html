@@ -1,0 +1,38 @@
+<!-- ie缓存问题.html -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ie缓存</title>
+    <style>
+        #ans {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <button>发送请求</button>
+    <div id="ans"></div>
+    <script>
+        const btn = document.getElementsByTagName('button')[0];
+        const ans = document.querySelector('#ans');
+        btn.addEventListener('click', () => {
+            const xhr = new XMLHttpRequest();
+            // 每次的时间不同就会被认为是不同的请求，就不会走缓存
+            xhr.open('GET', 'http://127.0.0.1:8000/ie?t='+Date.now());
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300) {
+                    ans.innerHTML = xhr.response;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

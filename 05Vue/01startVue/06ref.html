@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <div ref="hello" @click="showInfo">hello world</div> -->
+        <count-button ref="button1" @change="addCount"></count-button>
+        <count-button ref="button2" @change="addCount"></count-button>
+        <count-button ref="button3" @change="addCount"></count-button>
+        <div>total:{{total}}</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('CountButton', {
+            data() {
+                return {
+                    count: 0
+                }
+            },
+            template: '<button @click="add">{{count}}</button>',
+            methods: {
+                add: function () {
+                    this.count++;
+                    this.$emit('change', 'emitProps', 2)
+                }
+            }
+        })
+        const app = new Vue({
+            el: '#app',
+            methods: {
+                // showInfo:function(){
+                //     console.log(this.$refs.hello);
+                // },
+                addCount: function (value, addNum) {
+                    // console.log(this.$refs.button1);
+                    // this.total += addNum;
+                    this.total = this.$refs.button1.count + this.$refs.button2.count + this.$refs.button3.count;
+                }
+            },
+            data: {
+                total: 0
+            }
+        })
+    </script>
+</body>
+
+</html>

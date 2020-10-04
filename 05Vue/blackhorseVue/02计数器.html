@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style></style>
+</head>
+
+<body>
+    <div class="input-num">
+        <button @click="backward">-</button>
+        <span>{{msg}}</span>
+        <button @click="add">+</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '.input-num',
+            data: {
+                msg: 0
+            },
+            methods: {
+                backward: function () {
+                    if(this.msg<=0){
+                        alert("已经是最小了，不能再减了")
+                        return
+                    }
+                    this.msg--;
+                },
+                add:function(){
+                    if(this.msg>=10){
+                        alert("已经是最大了，不能再加了")
+                        return
+                    }
+                    this.msg++
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

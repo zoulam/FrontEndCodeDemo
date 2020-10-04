@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!--  同层级的节点直接传递值非常麻烦 -->
+
+<body>
+    <div id="app">
+        <child content="hello"></child>
+        <child content="hello"></child>
+        <child content="hello"></child>
+        <child content="bye"></child>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.prototype.bus = new Vue();
+        Vue.component('child', {
+            data() {
+                return {
+                    newVal: this.content
+                }
+            },
+            props: ['content'],
+            template: '<div @click="exchange">{{newVal}}</div>',
+            methods: {
+                exchange: function () {
+                    this.bus.$emit('change', this.newVal)
+                }
+            },
+
+            mounted: function () {
+                let _this = this
+                // 监听上面$emit声明的函数
+                this.bus.$on('change', function (msg) {
+                    // 打印的次数是根据使用组件的个数决定的
+                    // 原理，监听的是child组件
+                    // console.log(msg);
+
+                    // 这种操作是错误的
+                    // _this.content = msg;
+                    _this.newVal = msg;
+                })
+            }
+        })
+
+
+        let vm = new Vue({
+            el: '#app',
+            methods: {
+                exchange: function () {
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

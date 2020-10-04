@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            background-color: red;
+        }
+
+        .lazy {
+            background-color: yellow;
+        }
+
+        .btn-lg {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <template v-if="isShow">
+            <li>welcome</li>
+            <li>welcome</li>
+            <li>welcome</li>
+            <li>welcome</li>
+            <li>welcome</li>
+        </template>
+        <div v-show="ok"  v-if="isShow">
+            <li>welcome v-show</li>
+            <li>welcome v-show</li>
+            <li>welcome v-show</li>
+            <li>welcome v-show</li>
+            <li>welcome v-show</li>
+        </div>
+        <button class="active">click</button>
+        <button :class="'active'">click</button>
+        <button :class="{classObj,'btn-lg':isBig}">click</button>
+        <button :class="[isLazy]">click</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                classObj: {
+                    active: true,
+                },
+                isBig: true,
+                isLazy: 'lazy',
+                isShow: false,
+                ok:true
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <child :content='show'>
+            <div>i am slot</div>
+        </child>
+        <child :content='show'>
+            <div>i am slot2</div>
+        </child>
+        <button @click="change">change</button>
+    </div>
+    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('child', {
+            // 使用钩子函数，用js实现动画，达到封装进入组件的程度
+            props: ['content'],
+            template: `
+                <transition name="fade"
+                    @beforeEnter="handlerBeforeEnter"
+                    @enter="handlerEnter"
+                    @afterEnter="handlerAfterEnter"
+                    @beforeLeave="handlerBeforeLeave"
+                    @leave="handlerLeave"
+                    @afterLeave="handlerAfterLeave"
+                >
+                <slot v-if="content"></slot>
+                </transition>`,
+            methods: {
+                handlerBeforeEnter: function (el) {
+                    el.style.opacity = 0
+                    el.style.color = "red"
+                    console.log('进场动画即将执行');
+                },
+                handlerEnter: function (el,done) {
+                    Velocity(el, {
+                        opacity: 1
+                    }, {
+                        duration: 1000,
+                        complete: done
+                    })
+                    console.log('进场动画执行中……');
+                },
+                handlerAfterEnter: function (el) {
+                    console.log('进场动画完成');
+                },
+                handlerBeforeLeave: function (el) {
+                    el.style.opacity = 0;
+                    console.log('离场动画即将执行');
+                },
+                handlerLeave: function (el,done) {
+                    Velocity(el, {
+                        opacity: 0
+                    }, {
+                        duration: 1000,
+                        complete: done
+                    })
+                    console.log('离场动画执行中……');
+                },
+                handlerAfterLeave: function (el) {
+                    console.log('离场动画执行完成');
+                }
+            }
+        })
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                show: true
+            },
+            methods: {
+                change: function () {
+                    this.show = !this.show;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <child-one v-if="type === 'child-one'"></child-one>
+        <child-two v-if="type === 'child-two'"></child-two> -->
+
+        <!-- type是指定的组件名 -->
+        <!-- v-if的切换需要销毁DOM和创建DOM性能消耗高 -->
+        <!-- v-once缓存在内存，中搭配v-if使用提高性能 -->
+        <component :is="'child-one'"></component>
+        <component :is="type"></component>
+        <child-one v-if="type === 'child-two'"></child-one>
+        <child-two v-if="type === 'child-one'"></child-two>
+        <button @click="exchange">change</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('ChildOne', {
+            template: `<div v-once>this is child one</div>`,
+        })
+        Vue.component('ChildTwo', {
+            template: `<div v-once>this is child two</div>`
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                type: 'child-one'
+            },
+            methods: {
+                exchange: function () {
+                    this.type = (this.type === 'child-one' ? 'child-two' : 'child-one')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
